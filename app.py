@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+import keys
 app = Flask(__name__)
 @app.route("/")
 def index():
@@ -11,8 +11,7 @@ def index():
 
     filterf = []
     for fruit in fruits:
-        if fruit['name'][0] == 'o' or fruit['quantity'] > 3:
+        if fruit['name'][0] == 'o' and fruit['quantity'] < 3:
             filterf.append(fruit)
 
-    return render_template("index.html", fruits=fruits)
-
+    return render_template("index.html", fruits=filterf, key_1=keys.MY_SECRET_API_KEY_1, key_2=keys.MY_SECRET_API_KEY_2)
